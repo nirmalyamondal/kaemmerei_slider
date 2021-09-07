@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:kaemmerei_slider/Resources/Private/Language/locallang_db" date="2021-08-14T17:31:24Z" product-name="kaemmerei_slider">
+		<header/>
+		<body>
+			<trans-unit id="tx_kaemmereislider_pi1.name" resname="tx_kaemmereislider_pi1.name">
+				<source>Kaemmerei Slider</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_pi1.description" resname="tx_kaemmereislider_pi1.description">
+				<source>Responsive Kaemmerei slider with Title, Subtitle, Description, Image.</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record" resname="tx_kaemmereislider_domain_model_record">
+				<source>Kaemmerei Slider Records</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.tablabel" resname="tx_kaemmereislider_domain_model_record.tablabel">
+				<source>Tab Label</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.toptitle" resname="tx_kaemmereislider_domain_model_record.toptitle">
+				<source>Top Title</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.topdescription" resname="tx_kaemmereislider_domain_model_record.topdescription">
+				<source>Top Description</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.topimage" resname="tx_kaemmereislider_domain_model_record.topimage">
+				<source>Top Image</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.middletitle" resname="tx_kaemmereislider_domain_model_record.middletitle">
+				<source>Middle Title</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.middledescription" resname="tx_kaemmereislider_domain_model_record.middledescription">
+				<source>Middle Description</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.middleimage" resname="tx_kaemmereislider_domain_model_record.middleimage">
+				<source>Middle Image</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttoplabel" resname="tx_kaemmereislider_domain_model_record.lefttoplabel">
+				<source>Left Top Label</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttopimages" resname="tx_kaemmereislider_domain_model_record.lefttopimages">
+				<source>Left Top Images</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomlabel" resname="tx_kaemmereislider_domain_model_record.leftbottomlabel">
+				<source>Left Bottom Label</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomimages" resname="tx_kaemmereislider_domain_model_record.leftbottomimages">
+				<source>Left Bottom Images</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.bottomimage" resname="tx_kaemmereislider_domain_model_record.bottomimage">
+				<source>Bottom Image</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

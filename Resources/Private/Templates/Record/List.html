@@ -17,8 +17,15 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <nav class="container">
     <ul class="shopping-nav-desktop">
-    <f:for each="{records}" as="record" iteration="iterator">
-        <li class="active"><a href="javascript:;">{record.tablabel}</a></li>
+    <f:for each="{records}" as="record" iteration="iteratorOne">
+        <f:if condition="{iteratorOne.index} == '0'">
+            <f:then>
+                <li class="active"><a href="javascript:;">{record.tablabel}</a></li>
+            </f:then>
+            <f:else>
+                <li><a href="javascript:;">{record.tablabel}</a></li>
+            </f:else>
+        </f:if>
     </f:for>
     </ul>
 </nav>

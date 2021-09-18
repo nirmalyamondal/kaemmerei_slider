@@ -36,14 +36,26 @@
 			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttoplabel" resname="tx_kaemmereislider_domain_model_record.lefttoplabel">
 				<source>Left Top Label</source>
 			</trans-unit>
-			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttopimages" resname="tx_kaemmereislider_domain_model_record.lefttopimages">
-				<source>Left Top Images</source>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttopimagefirst" resname="tx_kaemmereislider_domain_model_record.lefttopimagefirst">
+				<source>Left Top Image First (Front, Background)</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttopimagesecond" resname="tx_kaemmereislider_domain_model_record.lefttopimagesecond">
+				<source>Left Top Image Second (Front, Background)</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.lefttopimagethird" resname="tx_kaemmereislider_domain_model_record.lefttopimagethird">
+				<source>Left Top Image Third (Front, Background)</source>
 			</trans-unit>
 			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomlabel" resname="tx_kaemmereislider_domain_model_record.leftbottomlabel">
 				<source>Left Bottom Label</source>
 			</trans-unit>
-			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomimages" resname="tx_kaemmereislider_domain_model_record.leftbottomimages">
-				<source>Left Bottom Images</source>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomimagefirst" resname="tx_kaemmereislider_domain_model_record.leftbottomimagefirst">
+				<source>Left Bottom Image First (Front, Background)</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomimagesecond" resname="tx_kaemmereislider_domain_model_record.leftbottomimagesecond">
+				<source>Left Bottom Image Second (Front, Background)</source>
+			</trans-unit>
+			<trans-unit id="tx_kaemmereislider_domain_model_record.leftbottomimagethird" resname="tx_kaemmereislider_domain_model_record.leftbottomimagethird">
+				<source>Left Bottom Image Third (Front, Background)</source>
 			</trans-unit>
 			<trans-unit id="tx_kaemmereislider_domain_model_record.bottomimage" resname="tx_kaemmereislider_domain_model_record.bottomimage">
 				<source>Bottom Image</source>

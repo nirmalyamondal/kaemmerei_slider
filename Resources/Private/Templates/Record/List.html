@@ -20,10 +20,10 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <f:for each="{records}" as="record" iteration="iteratorOne">
         <f:if condition="{iteratorOne.index} == '0'">
             <f:then>
-                <li class="active"><a href="javascript:;">{record.tablabel}</a></li>
+                <li class="active"><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
             </f:then>
             <f:else>
-                <li><a href="javascript:;">{record.tablabel}</a></li>
+                <li><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
             </f:else>
         </f:if>
     </f:for>
@@ -38,20 +38,24 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <ul class="shopping-slider">
     <f:for each="{records}" as="record" iteration="iterator">
         <li>
-          <section class="container">
+            <button class="accordion-btn">{record.tablabel}</button>
+            <div class="accordion-container">
+            <section class="container">
 
             <div class="row">
                 <div class="col-12 offset-xl-1 col-xl-5 order-xl-1">
-                    <figure data-control="PANNING" id="shopping-images" class="shopping-image image-level-1">
+                    <figure data-control="EXPLODE" id="shopping-images" class="shopping-image image-level-1 tilt">
                         <f:if condition="{record.topimage}">
-                            <img  class="img-fluid b-lazy" data-src="{record.topimage.originalResource.publicUrl}" src="{record.topimage.originalResource.publicUrl}" />
-                        </f:if>                             
+                            <f:for each="{record.topimage}" as="topimageone" iteration="iteratortopimage">
+                                <img  class="img-fluid b-lazy {topimageone.originalResource.description}" data-src="{topimageone.originalResource.publicUrl}" src="{topimageone.originalResource.publicUrl}" />
+                            </f:for>
+                        </f:if>           
                     </figure>
                 </div>
                 <div class="col-12 offset-xl-1 col-xl-5 order-xl-0">
                     <header>
                         <h1 data-control="PROXIMITY" id="shopping-header">{record.toptitle}<span>{record.toptitle}</span></h1>
-                        <p style="max-width:80%">{record.topdescription}</p>
+                        <p>{record.topdescription}</p>
                     </header>
                 </div>
             </div>
@@ -76,32 +80,114 @@ Otherwise your changes will be overwritten the next time you save the extension 
                     <div class="list-area">
                         <div class="list-area-items">
                             <span class="color-1"><f:if condition="{record.lefttoplabel}">{record.lefttoplabel}</f:if></span>
-                            <ul>
-                                <f:if condition="{record.lefttopimages}">
-                                    <f:for each="{record.lefttopimages}" as="lefttopimage" iteration="iteratorlefttopimage">
-                                        <li>
-                                            <a href="#">
-                                                <p>{lefttopimage.originalResource.description}</p>
-                                                <img data-src="{lefttopimage.originalResource.publicUrl}" src="{lefttopimage.originalResource.publicUrl}" />
-                                            </a>
-                                        </li>
-                                    </f:for>    
+                            <ul class="mt-15">
+                                <f:if condition="{record.lefttopimagefirst}">                                    
+                                    <f:for each="{record.lefttopimagefirst}" as="lefttopimagefirst" iteration="iteratorlefttopimage">
+                                        <f:if condition="{iteratorlefttopimage.isLast}">
+                                            <f:variable name="tbgimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorlefttopimage.isFirst}">
+                                            <f:variable name="tfrontimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="tfrontcaptionone">{lefttopimagefirst.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{tbgimageone}" class="image-link">
+                                            <p>{tfrontcaptionone}</p>
+                                            <img data-src="{tfrontimageone}" src="{tfrontimageone}"  alt="{tfrontcaptionone}" />
+                                        </a>
+                                    </li>  
+                                </f:if>
+                                <f:if condition="{record.lefttopimagesecond}">                                    
+                                    <f:for each="{record.lefttopimagesecond}" as="lefttopimagesecond" iteration="iteratorlefttopimage">
+                                        <f:if condition="{iteratorlefttopimage.isLast}">
+                                            <f:variable name="tbgimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorlefttopimage.isFirst}">
+                                            <f:variable name="tfrontimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="tfrontcaptionsecond">{lefttopimagesecond.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{tbgimagesecond}" class="image-link">
+                                            <p>{tfrontcaptionsecond}</p>
+                                            <img data-src="{tfrontimagesecond}" src="{tfrontimagesecond}"  alt="{tfrontcaptionsecond}" />
+                                        </a>
+                                    </li>  
+                                </f:if>
+                                <f:if condition="{record.lefttopimagethird}">                                    
+                                    <f:for each="{record.lefttopimagethird}" as="lefttopimagethird" iteration="iteratorlefttopimage">
+                                        <f:if condition="{iteratorlefttopimage.isLast}">
+                                            <f:variable name="tbgimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorlefttopimage.isFirst}">
+                                            <f:variable name="tfrontimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="tfrontcaptionthird">{lefttopimagethird.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{tbgimagethird}" class="image-link">
+                                            <p>{tfrontcaptionthird}</p>
+                                            <img data-src="{tfrontimagethird}" src="{tfrontimagethird}"  alt="{tfrontcaptionthird}" />
+                                        </a>
+                                    </li>  
                                 </f:if>
                             </ul>
                         </div>
                         <div class="list-area-items">
                             <span class="color-2"><f:if condition="{record.leftbottomlabel}">{record.leftbottomlabel}</f:if></span>
-                            <ul>
-                                <f:if condition="{record.leftbottomimages}">
-                                    <f:for each="{record.leftbottomimages}" as="leftbottomimage" iteration="iteratorleftbottomimage">
-                                        <li>
-                                            <a href="#">
-                                                <p>{leftbottomimage.originalResource.description}</p>
-                                                <img data-src="{leftbottomimage.originalResource.publicUrl}" src="{leftbottomimage.originalResource.publicUrl}" />
-                                            </a>
-                                        </li>
-                                    </f:for>    
+                            <ul class="mt-15">
+                                <f:if condition="{record.leftbottomimagefirst}">                                    
+                                    <f:for each="{record.leftbottomimagefirst}" as="leftbottomimagefirst" iteration="iteratorleftbottomimage">
+                                        <f:if condition="{iteratorleftbottomimage.isLast}">
+                                            <f:variable name="bbgimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                            <f:variable name="bfrontimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="bfrontcaptionone">{leftbottomimagefirst.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{bbgimageone}" class="image-link">
+                                            <p>{bfrontcaptionone}</p>
+                                            <img data-src="{bfrontimageone}" src="{bfrontimageone}"  alt="{bfrontcaptionone}" />
+                                        </a>
+                                    </li>  
                                 </f:if>
+                                <f:if condition="{record.leftbottomimagesecond}">                                    
+                                    <f:for each="{record.leftbottomimagesecond}" as="leftbottomimagesecond" iteration="iteratorleftbottomimage">
+                                        <f:if condition="{iteratorleftbottomimage.isLast}">
+                                            <f:variable name="bbgimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                            <f:variable name="bfrontimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="bfrontcaptionsecond">{leftbottomimagesecond.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{bbgimagesecond}" class="image-link">
+                                            <p>{bfrontcaptionsecond}</p>
+                                            <img data-src="{bfrontimagesecond}" src="{bfrontimagesecond}"  alt="{bfrontcaptionsecond}" />
+                                        </a>
+                                    </li>  
+                                </f:if>
+                                <f:if condition="{record.leftbottomimagethird}">                                    
+                                    <f:for each="{record.leftbottomimagethird}" as="leftbottomimagethird" iteration="iteratorleftbottomimage">
+                                        <f:if condition="{iteratorleftbottomimage.isLast}">
+                                            <f:variable name="bbgimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
+                                        </f:if>
+                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                            <f:variable name="bfrontimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
+                                            <f:variable name="bfrontcaptionthird">{leftbottomimagethird.originalResource.description}</f:variable>
+                                        </f:if>                                        
+                                    </f:for>  
+                                    <li>
+                                        <a href="{bbgimagethird}" class="image-link">
+                                            <p>{bfrontcaptionthird}</p>
+                                            <img data-src="{bfrontimagethird}" src="{bfrontimagethird}"  alt="{bfrontcaptionthird}" />
+                                        </a>
+                                    </li>  
+                                </f:if> 
                             </ul>
                         </div>                        
                     </div>

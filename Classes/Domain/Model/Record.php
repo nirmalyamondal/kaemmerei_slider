@@ -41,8 +41,8 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * topimage
      * 
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $topimage = null;
 
@@ -76,12 +76,28 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $lefttoplabel = '';
 
     /**
-     * lefttopimages
+     * lefttopimagefirst
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $lefttopimages = null;
+    protected $lefttopimagefirst = null;
+
+    /**
+     * lefttopimagesecond
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $lefttopimagesecond = null;
+
+    /**
+     * lefttopimagethird
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $lefttopimagethird = null;
 
     /**
      * leftbottomlabel
@@ -91,13 +107,29 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $leftbottomlabel = '';
 
     /**
-     * leftbottomimages
+     * leftbottomimagefirst
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
-    protected $leftbottomimages = null;
-                
+    protected $leftbottomimagefirst = null;
+
+    /**
+     * leftbottomimagesecond
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $leftbottomimagesecond = null;
+
+    /**
+     * leftbottomimagethird
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     */
+    protected $leftbottomimagethird = null;
+
     /**
      * bottomimage
      * 
@@ -125,8 +157,13 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->lefttopimages = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->leftbottomimages = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->topimage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->lefttopimagefirst = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->lefttopimagesecond = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->lefttopimagethird = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->leftbottomimagefirst = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->leftbottomimagesecond = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->leftbottomimagethird = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -194,7 +231,7 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the topimage
      * 
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $topimage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $topimage
      */
     public function getTopimage()
     {
@@ -204,10 +241,10 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the topimage
      * 
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $topimage
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $topimage
      * @return void
      */
-    public function setTopimage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $topimage)
+    public function setTopimage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $topimage)
     {
         $this->topimage = $topimage;
     }  
@@ -297,24 +334,66 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     } 
 
     /**
-     * Returns the lefttopimages
+     * Returns the lefttopimagefirst
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getLefttopimages()
+    public function getLefttopimagefirst()
     {
-        return $this->lefttopimages;
+        return $this->lefttopimagefirst;
     }
 
     /**
-     * Sets the lefttopimages
+     * Sets the lefttopimagefirst
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $lefttopimages
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $lefttopimagefirst
      * @return void
      */
-    public function setLefttopimages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $lefttopimages)
+    public function setLefttopimagefirst(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $lefttopimagefirst)
     {
-        $this->lefttopimages = $lefttopimages;
+        $this->lefttopimagefirst = $lefttopimagefirst;
+    }
+
+    /**
+     * Returns the lefttopimagesecond
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getLefttopimagesecond()
+    {
+        return $this->lefttopimagesecond;
+    }
+
+    /**
+     * Sets the lefttopimagesecond
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $lefttopimagesecond
+     * @return void
+     */
+    public function setLefttopimagesecond(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $lefttopimagesecond)
+    {
+        $this->lefttopimagesecond = $lefttopimagesecond;
+    }
+
+    /**
+     * Returns the lefttopimagethird
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getLefttopimagethird()
+    {
+        return $this->lefttopimagethird;
+    }
+
+    /**
+     * Sets the lefttopimagethird
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $lefttopimagethird
+     * @return void
+     */
+    public function setLefttopimagethird(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $lefttopimagethird)
+    {
+        $this->lefttopimagethird = $lefttopimagethird;
     }
 
     /**
@@ -339,26 +418,68 @@ class Record extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     } 
 
     /**
-     * Returns the leftbottomimages
+     * Returns the leftbottomimagefirst
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getLeftbottomimages()
+    public function getLeftbottomimagefirst()
     {
-        return $this->leftbottomimages;
+        return $this->leftbottomimagefirst;
     }
 
     /**
-     * Sets the leftbottomimages
+     * Sets the leftbottomimagefirst
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $leftbottomimages
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $leftbottomimagefirst
      * @return void
      */
-    public function setLeftbottomimages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $leftbottomimages)
+    public function setLeftbottomimagefirst(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $leftbottomimagefirst)
     {
-        $this->leftbottomimages = $leftbottomimages;
+        $this->leftbottomimagefirst = $leftbottomimagefirst;
     }
 
+    /**
+     * Returns the leftbottomimagesecond
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getLeftbottomimagesecond()
+    {
+        return $this->leftbottomimagesecond;
+    }
+
+    /**
+     * Sets the leftbottomimagesecond
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $leftbottomimagesecond
+     * @return void
+     */
+    public function setLeftbottomimagesecond(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $leftbottomimagesecond)
+    {
+        $this->leftbottomimagesecond = $leftbottomimagesecond;
+    }
+
+    /**
+     * Returns the leftbottomimagethird
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getLeftbottomimagethird()
+    {
+        return $this->leftbottomimagethird;
+    }
+
+    /**
+     * Sets the leftbottomimagethird
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\AshokaTree\KaemmereiSlider\Domain\Model\FileReference> $leftbottomimagethird
+     * @return void
+     */
+    public function setLeftbottomimagethird(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $leftbottomimagethird)
+    {
+        $this->leftbottomimagethird = $leftbottomimagethird;
+    }
+        
     /**
      * Returns the bottomimage
      * 

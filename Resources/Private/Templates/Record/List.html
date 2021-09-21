@@ -1,213 +1,593 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:layout name="Default" />
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-This Template is responsible for creating a table of domain objects.
+        <link rel="stylesheet" href="/frontend/css/locomotive-scroll.min.css"><link rel="stylesheet" href="/frontend/css/main.min.css"><link rel="stylesheet" href="/frontend/css/slick-theme.min.css"><link rel="stylesheet" href="/frontend/css/slick.min.css">
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+        
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+    </head>
 
-<f:section name="content">
-<div class="container-fluid component shopping animate-in pb-100 pt-100 mb-200" id="shopping" data-control="SHOPPING">
+    <body>
 
-<nav class="container">
-    <ul class="shopping-nav-desktop">
-    <f:for each="{records}" as="record" iteration="iteratorOne">
-        <f:if condition="{iteratorOne.index} == '0'">
-            <f:then>
-                <li class="active"><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
-            </f:then>
-            <f:else>
-                <li><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
-            </f:else>
-        </f:if>
-    </f:for>
-    </ul>
-</nav>
-<div class="container p-0">
-    <div class="shopping-navigation">
-        <button data-control="PROXIMITY" class="arrow previous" id="slider-shopping-nav-prev"><span></span></button>
-        <button data-control="PROXIMITY" class="arrow next" id="slider-shopping-nav-next"><span></span></button>
-    </div>
-</div>
-<ul class="shopping-slider">
-    <f:for each="{records}" as="record" iteration="iterator">
-        <li>
-            <button class="accordion-btn">{record.tablabel}</button>
-            <div class="accordion-container">
-            <section class="container">
+        
+        
+        <div class="scroll-container">
+            
+            <main id="main" class="homepage container-fluid px-0" data-control="HOME">
 
-            <div class="row">
-                <div class="col-12 offset-xl-1 col-xl-5 order-xl-1">
-                    <figure data-control="EXPLODE" id="shopping-images" class="shopping-image image-level-1 tilt">
-                        <f:if condition="{record.topimage}">
-                            <f:for each="{record.topimage}" as="topimageone" iteration="iteratortopimage">
-                                <img  class="img-fluid b-lazy {topimageone.originalResource.description}" data-src="{topimageone.originalResource.publicUrl}" src="{topimageone.originalResource.publicUrl}" />
+        
+
+                <div class="container-fluid component shopping animate-in pb-100 pt-100 mb-200" id="shopping" data-control="SHOPPING">
+                    <nav class="container">
+                        <ul class="shopping-nav-desktop">
+                            <f:for each="{records}" as="record" iteration="iteratorOne">
+                            <f:if condition="{iteratorOne.index} == '0'">
+                                <f:then>
+                                    <li class="active"><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
+                                </f:then>
+                                <f:else>
+                                    <li><a href="javascript:;" data-area="{record.tablabel}">{record.tablabel}</a></li>
+                                </f:else>
+                                </f:if>
                             </f:for>
-                        </f:if>           
-                    </figure>
-                </div>
-                <div class="col-12 offset-xl-1 col-xl-5 order-xl-0">
-                    <header>
-                        <h1 data-control="PROXIMITY" id="shopping-header">{record.toptitle}<span>{record.toptitle}</span></h1>
-                        <p>{record.topdescription}</p>
-                    </header>
-                </div>
-            </div>
-            <div class="row mb-60">
-                <div class="col-xl-6 col-12">
-                    <figure class="shopping-image image-level-2">
-                        <f:if condition="{record.middleimage}">
-                            <img  class="img-fluid b-lazy" data-src="{record.middleimage.originalResource.publicUrl}" src="{record.middleimage.originalResource.publicUrl}" />
-                        </f:if>
-                    </figure>
-                </div>
-                <div class="col-xl-5 offset-xl-1 col-12 pl-40">
-                    <f:if condition="{record.middletitle}"><h4 class="fade-in">{record.middletitle}</h4></f:if>
-                    <ul class="shopping-list">
-                        <f:if condition="{record.middledescription}">{record.middledescription -> f:format.html()}</f:if>
+                        </ul>
+                    </nav>
+                
+                    <div class="container p-0">
+                        <div class="shopping-navigation">
+                            <button data-control="PROXIMITY" class="arrow previous" id="slider-shopping-nav-prev"><span></span></button>
+                            <button data-control="PROXIMITY" class="arrow next" id="slider-shopping-nav-next"><span></span></button>
+                        </div>
+                    </div>
+                
+                    <ul class="shopping-slider">
+                        <f:for each="{records}" as="record" iteration="iterator">
+                            <f:variable name="rowLeftClass">col-12 col-xl-5 order-xl-1</f:variable>
+                            <f:variable name="rowRightClass">col-12 offset-xl-1 col-xl-5 order-xl-0</f:variable>
+                            <f:if condition="{record.tablabel} == 'Passage'">
+                                <f:variable name="bigOrMdium"></f:variable>
+                                <f:variable name="rowLeftClass">col-12 col-xl-5 order-xl-1</f:variable>
+                                <f:variable name="rowRightClass">col-12 offset-xl-1 col-xl-5 order-xl-0</f:variable>
+                                <f:variable name="mtfourty"></f:variable>
+                            </f:if>
+                            <f:if condition="{record.tablabel} == 'Salon'">
+                                <f:variable name="bigOrMdium">big</f:variable>
+                                <f:variable name="rowLeftClass">col-12 offset-xl-1 col-xl-5 order-xl-1</f:variable>
+                                <f:variable name="rowRightClass">col-12 offset-xl-1 col-xl-5 order-xl-0</f:variable>
+                                <f:variable name="mtfourty"></f:variable>
+                            </f:if>
+                            <f:if condition="{record.tablabel} == 'Atrium'">
+                                <f:variable name="bigOrMdium">big</f:variable>
+                                <f:variable name="rowLeftClass">col-12 col-xl-5 order-xl-1</f:variable>
+                                <f:variable name="rowRightClass">col-12 offset-xl-1 col-xl-6 order-xl-0</f:variable>
+                                <f:variable name="mtfourty">mt-40</f:variable>
+                            </f:if>
+                            <f:if condition="{record.tablabel} == 'Atelier'">
+                                <f:variable name="bigOrMdium">meduim</f:variable>
+                                <f:variable name="rowLeftClass">col-12 col-xl-5 order-xl-1</f:variable>
+                                <f:variable name="rowRightClass">col-12 offset-xl-1 col-xl-6 order-xl-0 pr-0</f:variable>
+                                <f:variable name="mtfourty"></f:variable>
+                            </f:if>
+                        <li>
+                            <button class="accordion-btn">{record.tablabel}<span></span></button>
+                            <div class="accordion-container">
+                                <section class="container">
+                                    <div class="row">
+                                        <div class="{rowLeftClass}">
+                                            <figure data-control="EXPLODE" id="shopping-images" class="shopping-image image-level-1 tilt">
+                                                <f:if condition="{record.topimage}">
+                                                    <f:for each="{record.topimage}" as="topimageone" iteration="iteratortopimage">
+                                                        <img  class="img-fluid b-lazy {topimageone.originalResource.description}" data-src="{topimageone.originalResource.publicUrl}" src="{topimageone.originalResource.publicUrl}" />
+                                                    </f:for>
+                                                </f:if>  
+                                            </figure>
+                                        </div>
+                                        <div class="{rowRightClass}">
+                                            <header>
+                                                <h1 data-control="PROXIMITY" id="shopping-header">{record.toptitle}<span>{record.toptitle}</span></h1>
+                                                <p>{record.topdescription}</p>
+                                            </header>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-60">
+                                        <div class="col-xl-6 col-12">
+                                            <figure class="shopping-image image-level-2">
+                                                <f:if condition="{record.middleimage}">
+                                                    <img  class="img-fluid b-lazy" data-src="{record.middleimage.originalResource.publicUrl}" src="{record.middleimage.originalResource.publicUrl}" />
+                                                </f:if>
+                                            </figure>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12 pl-40 {mtfourty}">
+                                            <f:if condition="{record.middletitle}"><h4 class="fade-in">{record.middletitle}</h4></f:if>
+                                            <f:if condition="{record.middledescription}">{record.middledescription -> f:format.html()}</f:if>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-12">
+                                            <div class="list-area">
+                                                <div class="list-area-items {bigOrMdium}">
+                                                    <span class="color-1"><f:if condition="{record.lefttoplabel}">{record.lefttoplabel}</f:if></span>
+                                                    <f:if condition="{record.lefttopimagefirst}">
+                                                    <ul class="mt-15">
+                                                       <f:if condition="{record.lefttopimagefirst}">                                    
+                                                            <f:for each="{record.lefttopimagefirst}" as="lefttopimagefirst" iteration="iteratorlefttopimage">
+                                                                <f:if condition="{iteratorlefttopimage.isLast}">
+                                                                    <f:variable name="tbgimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorlefttopimage.isFirst}">
+                                                                    <f:variable name="tfrontimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="tfrontcaptionone">{lefttopimagefirst.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{tbgimageone}" class="image-link">
+                                                                    <p>{tfrontcaptionone}</p>
+                                                                    <img data-src="{tfrontimageone}" src="{tfrontimageone}"  alt="{tfrontcaptionone}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                        <f:if condition="{record.lefttopimagesecond}">                                    
+                                                            <f:for each="{record.lefttopimagesecond}" as="lefttopimagesecond" iteration="iteratorlefttopimage">
+                                                                <f:if condition="{iteratorlefttopimage.isLast}">
+                                                                    <f:variable name="tbgimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorlefttopimage.isFirst}">
+                                                                    <f:variable name="tfrontimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="tfrontcaptionsecond">{lefttopimagesecond.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{tbgimagesecond}" class="image-link">
+                                                                    <p>{tfrontcaptionsecond}</p>
+                                                                    <img data-src="{tfrontimagesecond}" src="{tfrontimagesecond}"  alt="{tfrontcaptionsecond}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                        <f:if condition="{record.lefttopimagethird}">                                    
+                                                            <f:for each="{record.lefttopimagethird}" as="lefttopimagethird" iteration="iteratorlefttopimage">
+                                                                <f:if condition="{iteratorlefttopimage.isLast}">
+                                                                    <f:variable name="tbgimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorlefttopimage.isFirst}">
+                                                                    <f:variable name="tfrontimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="tfrontcaptionthird">{lefttopimagethird.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{tbgimagethird}" class="image-link">
+                                                                    <p>{tfrontcaptionthird}</p>
+                                                                    <img data-src="{tfrontimagethird}" src="{tfrontimagethird}"  alt="{tfrontcaptionthird}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                    </ul>
+                                                    </f:if>
+                                                </div>
+                                                <div class="list-area-items">
+                                                    <span class="color-2"><f:if condition="{record.leftbottomlabel}">{record.leftbottomlabel}</f:if></span>
+                                                    <f:if condition="{record.leftbottomimagefirst}">
+                                                    <ul class="mt-15">
+                                                        <f:if condition="{record.leftbottomimagefirst}">                                    
+                                                            <f:for each="{record.leftbottomimagefirst}" as="leftbottomimagefirst" iteration="iteratorleftbottomimage">
+                                                                <f:if condition="{iteratorleftbottomimage.isLast}">
+                                                                    <f:variable name="bbgimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                                                    <f:variable name="bfrontimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="bfrontcaptionone">{leftbottomimagefirst.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{bbgimageone}" class="image-link">
+                                                                    <p>{bfrontcaptionone}</p>
+                                                                    <img data-src="{bfrontimageone}" src="{bfrontimageone}"  alt="{bfrontcaptionone}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                        <f:if condition="{record.leftbottomimagesecond}">                                    
+                                                            <f:for each="{record.leftbottomimagesecond}" as="leftbottomimagesecond" iteration="iteratorleftbottomimage">
+                                                                <f:if condition="{iteratorleftbottomimage.isLast}">
+                                                                    <f:variable name="bbgimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                                                    <f:variable name="bfrontimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="bfrontcaptionsecond">{leftbottomimagesecond.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{bbgimagesecond}" class="image-link">
+                                                                    <p>{bfrontcaptionsecond}</p>
+                                                                    <img data-src="{bfrontimagesecond}" src="{bfrontimagesecond}"  alt="{bfrontcaptionsecond}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                        <f:if condition="{record.leftbottomimagethird}">                                    
+                                                            <f:for each="{record.leftbottomimagethird}" as="leftbottomimagethird" iteration="iteratorleftbottomimage">
+                                                                <f:if condition="{iteratorleftbottomimage.isLast}">
+                                                                    <f:variable name="bbgimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
+                                                                </f:if>
+                                                                <f:if condition="{iteratorleftbottomimage.isFirst}">
+                                                                    <f:variable name="bfrontimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
+                                                                    <f:variable name="bfrontcaptionthird">{leftbottomimagethird.originalResource.description}</f:variable>
+                                                                </f:if>                                        
+                                                            </f:for>  
+                                                            <li>
+                                                                <a href="{bbgimagethird}" class="image-link">
+                                                                    <p>{bfrontcaptionthird}</p>
+                                                                    <img data-src="{bfrontimagethird}" src="{bfrontimagethird}"  alt="{bfrontcaptionthird}" />
+                                                                </a>
+                                                            </li>  
+                                                        </f:if>
+                                                    </ul>
+                                                    </f:if>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12">
+                                            <figure class="shopping-image image-level-3">
+                                                <f:if condition="{record.bottomimage}">
+                                                    <img  class="img-fluid b-lazy" data-src="{record.bottomimage.originalResource.publicUrl}" src="{record.bottomimage.originalResource.publicUrl}" />
+                                                </f:if>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </li>
+
+                        <!--li>
+                            <button class="accordion-btn">Salon<span></span></button>
+                            <div class="accordion-container">
+                                <section class="container">
+                                    <div class="row">
+                                        <div class="col-12 offset-xl-1 col-xl-5 order-xl-1">
+                                            <figure data-control="EXPLODE" id="shopping-images-salon" class="shopping-image image-level-1 tilt">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-2-1.png" src="/frontend/contents/shopping-2-1.png">
+                
+                
+                                                <img class="img-fluid b-lazy plan p-first" data-src="/frontend/contents/shopping-2-1.png" src="/frontend/contents/shopping-2-1.png">
+                                            
+                                            
+                                                <img class="img-fluid b-lazy plan p-second" data-src="/frontend/contents/shopping-2-2.png" src="/frontend/contents/shopping-2-2.png">
+                                                <img class="img-fluid b-lazy plan p-third" data-src="/frontend/contents/shopping-2-3.png" src="/frontend/contents/shopping-2-3.png">
+                                                
+                                            </figure>
+                                        </div>
+                                        <div class="col-12 offset-xl-1 col-xl-5 order-xl-0">
+                                            <header>
+                                                <h1 data-control="PROXIMITY" id="shopping-header">Das Auge Isst mit!<span>Das Auge Isst mit!</span></h1>
+                                                <p>Zur Lebenslust gehört natürlich auch die Lust am Genuss. Das Gastronomiekonzept mit Restaurant und Bar — letztere im Tresor der alten Stadtkasse — verspricht Ästhetik auf  höchstem Niveau.</p>
+                                            </header>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-60">
+                                        <div class="col-xl-6 col-12">
+                                            <figure class="shopping-image image-level-2">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-salon-i.jpg" src="/frontend/contents/shopping-salon-i.jpg">
+                                            </figure>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12 pl-40">
+                                            <h4 class="fade-in">Restaurant</h4>
+                                            <ul class="shopping-list">
+                                                <li>
+                                                    <p class="fade-in">Neuer großzügiger Eingang über Marktplatz</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Großzügige Öffnung der Fassade bei gleichzeitigem Versetzen des historischen Vordachs</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Die neue Restaurantfläche erstreckt sich über zwei Geschosse,
+                                                        welche durch eine Freitreppe miteinander verbunden werden.
+                                                        </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">EG: Gastraum Restaurant, Küchenbereich Restaurant</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">UG: Gastraum Bar, Tresor, Nebenflächen Restaurant und Bar
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Lichte Raumhöhe im EG: ca. 4,25 m</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Anlieferung über Rheinstraße (inkl. Lastenaufzug)</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Außengastronomie Richtung Marktplatz</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Restaurant: ca. 125 Sitzplätze</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Bar: ca. 40 Sitzplätze
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Barrierefreier Zugang über Marktplatz</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Mechanische Be- und Entlüftung</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Möglichkeit einer Außenterrasse auf städtischem Grundstück</p>
+                                                </li>
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-12">
+                                            <div class="list-area">
+                                                <div class="list-area-items big">
+                                                    <span class="color-1">Grundrisse</span>
+                                                    <ul>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Salon_Grundriss_Erdgeschoss.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-salon-blueprint-i.svg" alt="Untergeschoss">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Salon_Grundriss_Untergeschoss.png">
+                                                                <p>Untergeschoss</p>
+                                                                <img src="/frontend/contents/shopping-salon-blueprint-ii.svg" alt="Untergeschoss">
+                                                            </a>
+                                                        </li>
+                                                    
+                                                    </ul>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12">
+                                            <figure class="shopping-image image-level-3">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-salon-ii.jpg" src="/frontend/contents/shopping-salon-ii.jpg">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="accordion-btn">Atrium<span></span></button>
+                            <div class="accordion-container">
+                                <section class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-xl-5 order-xl-1">
+                                            <figure data-control="EXPLODE" id="shopping-images-salon" class="shopping-image image-level-1 tilt">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-4-1.png" src="/frontend/contents/shopping-4-1.png">
+                
+                                                <img class="img-fluid b-lazy plan p-third" data-src="/frontend/contents/shopping-4-3.png" src="/frontend/contents/shopping-4-3.png">
+                                                <img class="img-fluid b-lazy plan p-second" data-src="/frontend/contents/shopping-4-2.png" src="/frontend/contents/shopping-4-2.png">
+                                                <img class="img-fluid b-lazy plan p-first" data-src="/frontend/contents/shopping-4-1.png" src="/frontend/contents/shopping-4-1.png">
+                                                <img class="img-fluid b-lazy plan p-fourth" data-src="/frontend/contents/shopping-4-4.png" src="/frontend/contents/shopping-4-4.png">
+                                                
+                                            </figure>
+                                        </div>
+                                        <div class="col-12 offset-xl-1 col-xl-6 order-xl-0">
+                                            <header>
+                                                <h1 data-control="PROXIMITY" data-clone-text="true" id="shopping-header">Für Momente Die bleiben!<span>Für Momente Die bleiben!</span></h1>
+                                                <p>Hier lässt es sich gut arbeiten - Insgesamt 5.083 m2, verteilt auf 3 klimatisierten Etagen. Bis zu 3 Mieteinheiten je Geschoss möglich!</p>
+                                            </header>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-60">
+                                        <div class="col-xl-6 col-12">
+                                            <figure class="shopping-image image-level-2">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-atrium-i.jpg" src="/frontend/contents/shopping-atrium-i.jpg">
+                                            </figure>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12 pl-40 mt-40">
+                                            <h4 class="fade-in">Event</h4>
+                                            <ul class="shopping-list">
+                                                <li>
+                                                    <p class="fade-in">Neuer Zugang (barrierefrei) über Arkade Marktstraße
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">ca. 6,30 m lichte Raumhöhe unter Glasdach
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">ca. 3,40 m lichte Raumhöhe im umlaufenden Bereich
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Bogendach wird mit Glaselementen geschlossen (öffenbar)
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Versammlungsstätte bis 1.000 Personen</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Luftqualität IDA II: 500 Personen, IDA III 930 Personen
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Fläche bei Stehveranstaltung für bis zu 920 Personen</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Nebenflächen direkt angrenzend
+                                                    </p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Anlieferung über Rheinstraße</p>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-12">
+                                            <div class="list-area">
+                                                <div class="list-area-items big">
+                                                    <span class="color-1">Retailflächen</span>
+                                                    <ul>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atrium_Grundriss_Erdgeschoss.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atrium-blueprint-i.svg" alt="Erdgeschoss">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atrium_Grundriss_Untergeschoss.png">
+                                                                <p>Untergeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atrium-blueprint-ii.svg" alt="Untergeschoss">
+                                                            </a>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12">
+                                            <figure class="shopping-image image-level-3">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-atrium-ii.jpg" src="/frontend/contents/shopping-atrium-ii.jpg">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="accordion-btn">Atelier<span></span></button>
+                            <div class="accordion-container">
+                                <section class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-xl-5 order-xl-1">
+                                            <figure data-control="EXPLODE" id="shopping-images-salon" class="shopping-image image-level-1 tilt">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-3-1.png" src="/frontend/contents/shopping-3-1.png">
+                
+                                                <img class="img-fluid b-lazy plan p-second" data-src="/frontend/contents/shopping-3-3.png" src="/frontend/contents/shopping-3-3.png">
+                                                <img class="img-fluid b-lazy plan p-third" data-src="/frontend/contents/shopping-3-2.png" src="/frontend/contents/shopping-3-2.png">
+                                                <img class="img-fluid b-lazy plan p-first" data-src="/frontend/contents/shopping-3-1.png" src="/frontend/contents/shopping-3-1.png">
+                                                
+                                            </figure>
+                                        </div>
+                                        <div class="col-12 offset-xl-1 col-xl-6 order-xl-0 pr-0">
+                                            <header>
+                                                <h1 data-control="PROXIMITY" id="shopping-header">Auf die Work - Nice - Balance Achten.<span>Auf die Work - Nice - Balance Achten.</span></h1>
+                                                <p>Unter dem gläsernen Bogendach können Veranstaltungen mit bis zu 1.000 Personen stattfinden. Kunst und Kultur haben nun eine neue, aufregende Bühne in der Kämmerei. Der neue Zugang zu den Veranstaltungen jeglicher Art wird in der Neuauflage barrierefrei gestaltet.</p>
+                                            </header>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-60">
+                                        <div class="col-xl-6 col-12">
+                                            <figure class="shopping-image image-level-2">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-atelier-i.jpg" src="/frontend/contents/shopping-atelier-i.jpg">
+                                            </figure>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12 pl-40 pt-200">
+                                            <h4 class="fade-in">Event</h4>
+                                            <ul class="shopping-list">
+                                                <li>
+                                                    <p class="fade-in">Bis zu 3 Mieteinheiten je Geschoss möglich</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Jede Mieteinheit verfügt im 1. OG über eine eigene Terrasse</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Sämtliche Fenster werden erneuert</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Einsatz von Deckensegeln für Heizen, Kühlen, Sensorik, Akustik und Licht</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Maschinelle Be- und Entlüftung</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Denkmalgeschützt: Bodenfliesen Flur, Treppenhäuser, Einbauschränke,
+                                                        Sitzungssaal</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Mischung aus offenen und geschlossenen Büroflächen</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Lichte Raumhöhe unter den Deckensegeln: 3,00 m</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Flurkoffer: 2,50 m</p>
+                                                </li>
+                                                <li>
+                                                    <p class="fade-in">Smart Building durch Sensorik</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-6 col-12">
+                                            <div class="list-area">
+                                                <div class="list-area-items medium">
+                                                    <span class="color-1">Grundrisse</span>
+                                                    <ul>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atelier_Grundriss_Obergeschoss_01.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atelier-blueprint-i.svg" alt="Erdgeschoss">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atelier_Grundriss_Obergeschoss_02.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atelier-blueprint-ii.svg" alt="Erdgeschoss">
+                                                            </a>
+                                                        </li>
+                                                    
+                                                    </ul>
+                                                </div>
+                                                <div class="list-area-items medium">
+                                                    
+                                                    <ul>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atelier_Grundriss_Obergeschoss_03.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atelier-blueprint-iii.svg" alt="Erdgeschoss">
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="image-link" href="/frontend/contents/Atelier_Grundriss_Dachgeschoss.png">
+                                                                <p>Erdgeschoss</p>
+                                                                <img src="/frontend/contents/shopping-atelier-blueprint-iv.svg" alt="Erdgeschoss">
+                                                            </a>
+                                                        </li>
+                                                    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-5 offset-xl-1 col-12">
+                                            <figure class="shopping-image image-level-3">
+                                                <img class="img-fluid b-lazy" data-src="/frontend/contents/shopping-atelier-ii.jpg" src="/frontend/contents/shopping-atelier-ii.jpg">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </li-->
+                        
+                        </f:for>   
                     </ul>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-xl-6 col-12">
-                    <div class="list-area">
-                        <div class="list-area-items">
-                            <span class="color-1"><f:if condition="{record.lefttoplabel}">{record.lefttoplabel}</f:if></span>
-                            <ul class="mt-15">
-                                <f:if condition="{record.lefttopimagefirst}">                                    
-                                    <f:for each="{record.lefttopimagefirst}" as="lefttopimagefirst" iteration="iteratorlefttopimage">
-                                        <f:if condition="{iteratorlefttopimage.isLast}">
-                                            <f:variable name="tbgimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorlefttopimage.isFirst}">
-                                            <f:variable name="tfrontimageone">{lefttopimagefirst.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="tfrontcaptionone">{lefttopimagefirst.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{tbgimageone}" class="image-link">
-                                            <p>{tfrontcaptionone}</p>
-                                            <img data-src="{tfrontimageone}" src="{tfrontimageone}"  alt="{tfrontcaptionone}" />
-                                        </a>
-                                    </li>  
-                                </f:if>
-                                <f:if condition="{record.lefttopimagesecond}">                                    
-                                    <f:for each="{record.lefttopimagesecond}" as="lefttopimagesecond" iteration="iteratorlefttopimage">
-                                        <f:if condition="{iteratorlefttopimage.isLast}">
-                                            <f:variable name="tbgimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorlefttopimage.isFirst}">
-                                            <f:variable name="tfrontimagesecond">{lefttopimagesecond.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="tfrontcaptionsecond">{lefttopimagesecond.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{tbgimagesecond}" class="image-link">
-                                            <p>{tfrontcaptionsecond}</p>
-                                            <img data-src="{tfrontimagesecond}" src="{tfrontimagesecond}"  alt="{tfrontcaptionsecond}" />
-                                        </a>
-                                    </li>  
-                                </f:if>
-                                <f:if condition="{record.lefttopimagethird}">                                    
-                                    <f:for each="{record.lefttopimagethird}" as="lefttopimagethird" iteration="iteratorlefttopimage">
-                                        <f:if condition="{iteratorlefttopimage.isLast}">
-                                            <f:variable name="tbgimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorlefttopimage.isFirst}">
-                                            <f:variable name="tfrontimagethird">{lefttopimagethird.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="tfrontcaptionthird">{lefttopimagethird.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{tbgimagethird}" class="image-link">
-                                            <p>{tfrontcaptionthird}</p>
-                                            <img data-src="{tfrontimagethird}" src="{tfrontimagethird}"  alt="{tfrontcaptionthird}" />
-                                        </a>
-                                    </li>  
-                                </f:if>
-                            </ul>
-                        </div>
-                        <div class="list-area-items">
-                            <span class="color-2"><f:if condition="{record.leftbottomlabel}">{record.leftbottomlabel}</f:if></span>
-                            <ul class="mt-15">
-                                <f:if condition="{record.leftbottomimagefirst}">                                    
-                                    <f:for each="{record.leftbottomimagefirst}" as="leftbottomimagefirst" iteration="iteratorleftbottomimage">
-                                        <f:if condition="{iteratorleftbottomimage.isLast}">
-                                            <f:variable name="bbgimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
-                                            <f:variable name="bfrontimageone">{leftbottomimagefirst.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="bfrontcaptionone">{leftbottomimagefirst.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{bbgimageone}" class="image-link">
-                                            <p>{bfrontcaptionone}</p>
-                                            <img data-src="{bfrontimageone}" src="{bfrontimageone}"  alt="{bfrontcaptionone}" />
-                                        </a>
-                                    </li>  
-                                </f:if>
-                                <f:if condition="{record.leftbottomimagesecond}">                                    
-                                    <f:for each="{record.leftbottomimagesecond}" as="leftbottomimagesecond" iteration="iteratorleftbottomimage">
-                                        <f:if condition="{iteratorleftbottomimage.isLast}">
-                                            <f:variable name="bbgimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
-                                            <f:variable name="bfrontimagesecond">{leftbottomimagesecond.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="bfrontcaptionsecond">{leftbottomimagesecond.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{bbgimagesecond}" class="image-link">
-                                            <p>{bfrontcaptionsecond}</p>
-                                            <img data-src="{bfrontimagesecond}" src="{bfrontimagesecond}"  alt="{bfrontcaptionsecond}" />
-                                        </a>
-                                    </li>  
-                                </f:if>
-                                <f:if condition="{record.leftbottomimagethird}">                                    
-                                    <f:for each="{record.leftbottomimagethird}" as="leftbottomimagethird" iteration="iteratorleftbottomimage">
-                                        <f:if condition="{iteratorleftbottomimage.isLast}">
-                                            <f:variable name="bbgimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
-                                        </f:if>
-                                        <f:if condition="{iteratorleftbottomimage.isFirst}">
-                                            <f:variable name="bfrontimagethird">{leftbottomimagethird.originalResource.publicUrl}</f:variable>
-                                            <f:variable name="bfrontcaptionthird">{leftbottomimagethird.originalResource.description}</f:variable>
-                                        </f:if>                                        
-                                    </f:for>  
-                                    <li>
-                                        <a href="{bbgimagethird}" class="image-link">
-                                            <p>{bfrontcaptionthird}</p>
-                                            <img data-src="{bfrontimagethird}" src="{bfrontimagethird}"  alt="{bfrontcaptionthird}" />
-                                        </a>
-                                    </li>  
-                                </f:if> 
-                            </ul>
-                        </div>                        
-                    </div>
-                </div>
                 
-                <div class="col-xl-5 offset-xl-1 col-12">
-                    <figure class="shopping-image image-level-3">
-                        <f:if condition="{record.bottomimage}">
-                            <img  class="img-fluid b-lazy" data-src="{record.bottomimage.originalResource.publicUrl}" src="{record.bottomimage.originalResource.publicUrl}" />
-                        </f:if>
-                    </figure>
-                </div>
-            </div>
+                                        
+                
+ 
 
-          </section>  
-        </li>
-    </f:for>    
+            </main>
+        
+        </div>
+        
 
+        <script src="/frontend/js/bundle.min.js"></script><script src="/frontend/js/main.min.js"></script>
 
-</div>
-</f:section>
+    </body>
 
 </html>
